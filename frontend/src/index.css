@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Penny Wise design tokens, centralized here so the palette can be
+  tuned in one place without touching component code (spec section 6).
+*/
+:root {
+  --void-black: #080606;
+  --abyss-black: #110C0D;
+  --charcoal: #1A1516;
+  --dark-wine: #241114;
+  --deep-crimson: #4A0F18;
+  --penny-crimson: #7A1626;
+  --blood-red: #A51D2D;
+  --muted-rose: #B85C68;
+  --aged-ivory: #E8D8C8;
+  --ash: #B4AAA5;
+  --smoke: #766D6A;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--void-black);
+  color: var(--aged-ivory);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Thin, deliberate scrollbars that stay inside the palette. */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--dark-wine);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--deep-crimson);
+}
+
+/* Visible keyboard focus states everywhere (spec section 24). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--penny-crimson);
+  outline-offset: 2px;
+}
+
+.font-display {
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+/* Restrained entrance animation for cards. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise {
+  animation: rise-in 220ms ease-out both;
+}
