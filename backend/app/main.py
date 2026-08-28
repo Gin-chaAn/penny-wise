@@ -5,6 +5,8 @@ A small, focused backend: five feature areas, one SQLite database,
 no authentication, no unnecessary infrastructure. See
 project-docs/plan.md for the full product spec.
 """
+import os
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -22,9 +24,20 @@ app = FastAPI(
 )
 
 # Local dev only — the Vite dev server runs on 5173 by default.
+frontend_urls = os.getenv(
+    "FRONTEND_URLS",
+    "http://localhost:5173,http://127.0.0.1:5173",
+)
+
+allowed_origins = [
+    origin.strip().rstrip("/")
+    for origin in frontend_urls.split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
