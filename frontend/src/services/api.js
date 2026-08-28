@@ -4,7 +4,7 @@
  * section 26 ("do not build an unnecessarily complicated state
  * management system").
  */
-const BASE_URL = (import.meta.env.VITE_API_URL || "/api").replace(/\/$/, "");
+const BASE_URL = `${(import.meta.env.VITE_API_URL || "").replace(/\/$/, "")}/api`;
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE_URL}${path}`, {
