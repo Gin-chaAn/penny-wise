@@ -14,7 +14,7 @@ from app.models import VALID_CATEGORIES, VALID_FREQUENCIES
 
 
 class AmountValidatedModel(BaseModel):
-    @field_validator("amount")
+    @field_validator("amount", check_fields=False)
     @classmethod
     def amount_must_be_positive(cls, v):
         if v is None:
